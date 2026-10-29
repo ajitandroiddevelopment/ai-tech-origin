@@ -559,3 +559,110 @@ textarea {
     transform: none;
   }
 }
+
+.sign-in-options {
+  margin-top: 25px;
+  width: 100%;
+}
+.sign-in-options .google-sign-in {
+  width: 100%;
+  min-height: 50px;
+  border: 1px solid #dadce0;
+  border-radius: 15px;
+  background: #fff;
+  color: #1f1f1f;
+  box-shadow: none;
+  font-size: 15px;
+  font-weight: 700;
+  gap: 13px;
+}
+.sign-in-divider {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin: 23px 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+.sign-in-divider span {
+  height: 1px;
+  background: var(--line);
+  flex: 1;
+}
+.sign-in-options form {
+  margin: 0;
+  display: block;
+}
+.sign-in-options form > label {
+  display: block;
+  margin: 0 0 9px;
+  font-size: 14px;
+}
+.sign-in-options input {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  padding: 13px 15px;
+  font-size: 16px;
+  min-height: 50px;
+}
+.sign-in-options form > .email-sign-in {
+  display: flex;
+  width: 100%;
+  margin: 14px 0 0;
+  min-height: 50px;
+  border-radius: 15px;
+  font-size: 15px;
+  gap: 10px;
+}
+.sign-in-options .auth-feedback {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--ink);
+  margin: 18px 0 0;
+  overflow-wrap: anywhere;
+}
+.sign-in-options .auth-feedback:empty {
+  display: none;
+}
+.sign-in-options .auth-explainer {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--muted);
+  margin: 14px 0 0;
+}
+.login-modal {
+  border-radius: 24px;
+  width: 480px;
+  max-width: calc(100vw - 32px);
+  max-height: calc(100dvh - 40px);
+  overflow: auto;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  padding: 35px;
+}
+.login-modal h2 {
+  font-size: 27px;
+  line-height: 1.25;
+  margin: 12px 0;
+}
+.login-modal > p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+.login-modal .sign-in-options input {
+  font-size: 16px;
+}
+@media (max-width: 760px) {
+  .login-modal {
+    padding: 30px 22px;
+  }
+  .login-modal h2 {
+    font-size: 25px;
+  }
+  .studio-login > p {
+    font-size: 15px;
+  }
+}

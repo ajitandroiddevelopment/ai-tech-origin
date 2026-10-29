@@ -25,7 +25,7 @@ Next.js App Router, TypeScript, React, Supabase Postgres/Auth/Storage, Vercel ho
 - components/image-comparison.tsx: shared input/output slider used in the public detail page and admin preview; starts centered at 50%.
 - components/admin.tsx: content management, drafts, publishing, image uploads, process order, newsletter paragraphs, import/export, visitor dashboard.
 - components/admin-workspace.tsx: owner-controlled team access, agent keys, and personal password setup.
-- components/studio-login.tsx: email/password admin sign-in, with email-link fallback for first login or recovery.
+- components/studio-login.tsx and sign-in-options.tsx: shared Google and email-link sign-in for visitors and admins.
 - lib/content.ts: reads published resources from the database; never restores unpublished resources from seed data.
 - lib/http.ts: validates editor sessions and same-origin browser writes.
 - content/library.json: original local starter catalog. Changing it alone does not change the production database.
@@ -34,7 +34,7 @@ Next.js App Router, TypeScript, React, Supabase Postgres/Auth/Storage, Vercel ho
 
 ## Manual admin workflow
 
-1. Open /admin. Sign in with the owner's verified email. On the first visit, choose the email-link option; set a personal password under My account. Never paste a password into chat or commit it to GitHub.
+1. Open /admin. Sign in with the owner's verified email. Choose Continue with Google or Continue with email. The Google identity must match your privately configured admin email. Never paste a password into chat or commit it to GitHub.
 2. Choose New resource, select section/format, and enter title, unique lowercase hyphenated slug, collection, summary, and prompt.
 3. Add customization variables such as {{subject}}; each variable needs a key, label, and default. Variables used in the prompt must be defined.
 4. Add ordered process steps. Each step can contain a title, explanation, and its own copyable prompt. Reorder using the up/down controls.
@@ -48,7 +48,7 @@ Next.js App Router, TypeScript, React, Supabase Postgres/Auth/Storage, Vercel ho
 
 The private editor allowlist is the source of truth. Roles are checked against the currently verified Supabase user on every protected operation, not user-editable metadata. The owner can add/remove admins and issue/revoke agent keys. Additional admins manage content, uploads, subscribers, and visitor metrics; they cannot manage the owner or agent credentials. Removing an admin's allowlist entry immediately blocks new protected operations even if an old access token has not expired. Only already-downloaded data cannot be recalled.
 
-The owner can optionally supply an initial password for a new admin account. Supabase stores authentication passwords, never the content tables. A new account must verify its email before it can publish. Existing accounts keep their password: adding admin access is not a password reset. Each signed-in admin can change their own password. The owner account cannot be removed through the team UI. Store the owner's actual email only in the private database, not this public guide.
+The owner can optionally supply an initial password for a new admin account. Supabase stores authentication passwords, never the content tables. A new account must verify its email before it can publish. Existing accounts keep their password: adding admin access is not a password reset. The public sign-in UI uses Google or an email link; the optional My account password setting remains available for account management. The owner account cannot be removed through the team UI. Store the owner's actual email only in the private database, not this public guide.
 
 ## AI-agent connection window
 
@@ -124,3 +124,13 @@ NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY, NEXT_PUBLIC_SITE
 5. Operations: restore drills, audit retention, error tracking, indexes, media transforms, accessibility/performance budgets, and stronger admin authentication as audience and revenue grow.
 
 Keep roadmap features clearly separate from working functionality. Discuss payment-provider accounts, billing, and concrete spending before enabling them.
+
+## Google sign-in setup
+
+The application calls Supabase signInWithOAuth with provider google and redirects only to /admin or /. Existing verified-email owner/admin rules remain unchanged; signing in with any Google account does not grant admin privileges.
+
+Google must be configured once in Supabase before the button can start OAuth. The /api/auth/options endpoint reports only provider availability, never client IDs or secrets. If Google is not configured, the UI explains its status and keeps email-link sign-in available.
+
+In Google Auth Platform, configure AI Tech Origin, the basic openid/email/profile scopes, and an external audience. Use a Web application OAuth client with JavaScript origin https://ai-tech-origin.vercel.app and callback https://kqcubqjiyylryrobiiuw.supabase.co/auth/v1/callback. Add the owner's email as a test user if the consent app is in Testing; switch to Production when ready for all visitors. Save the client ID and client secret only in Supabase Authentication → Sign In / Providers → Google. Never commit the client secret or put it in NEXT_PUBLIC_ environment variables. Keep nonce checks enabled. Set up the same allowed site/redirect URLs already documented above. The owner must perform final credential creation and enter credentials directly in the provider settings.
+
+Email links show a 60-second resend countdown and an explicit expired-link message. Always use the latest email. Google login avoids the email-delivery dependency; the email method still needs production SMTP for unrestricted addresses.

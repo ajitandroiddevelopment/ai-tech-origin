@@ -9,7 +9,8 @@ import {
 } from "react";
 import { getBrowserDatabase } from "@/lib/supabase";
 import type { Session } from "@supabase/supabase-js";
-import { X, Check, Mail } from "lucide-react";
+import { X, Check } from "lucide-react";
+import { SignInOptions } from "./sign-in-options";
 type Saved = { slug: string; at: string };
 type Recent = { slug: string; at: string };
 type AppContext = {
@@ -58,8 +59,6 @@ export function Providers({ children }: { children: React.ReactNode }) {
   const [message, setMessage] = useState("");
   const [session, setSession] = useState<Session | null>(null);
   const [login, setLogin] = useState(false);
-  const [email, setEmail] = useState("");
-  const [loginMessage, setLoginMessage] = useState("");
   const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const db = useMemo(() => getBrowserDatabase(), []);
   useEffect(() => {
@@ -169,22 +168,6 @@ export function Providers({ children }: { children: React.ReactNode }) {
     }
     setLogin(true);
   };
-  async function sendLink(e: React.FormEvent) {
-    e.preventDefault();
-    if (!db) return;
-    setLoginMessage("Sending your sign-in link…");
-    const { error } = await db.auth.signInWithOtp({
-      email,
-      options: {
-        emailRedirectTo:
-          window.location.origin +
-          (window.location.pathname.startsWith("/admin") ? "/admin" : "/"),
-      },
-    });
-    setLoginMessage(
-      error ? error.message : "Check your email for a secure sign-in link.",
-    );
-  }
   return (
     <Context.Provider
       value={{
@@ -225,26 +208,9 @@ export function Providers({ children }: { children: React.ReactNode }) {
             >
               <X />
             </button>
-            <Mail size={28} />
-            <h2 id="login-title">Keep your good finds.</h2>
-            <p>
-              Get a secure email link to sign in. Admins can set a password in
-              My account after signing in.
-            </p>
-            <form onSubmit={sendLink}>
-              <label htmlFor="login-email">Email address</label>
-              <input
-                id="login-email"
-                required
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <button className="button primary" type="submit">
-                Send sign-in link
-              </button>
-            </form>
-            <p role="status">{loginMessage}</p>
+            <h2 id="login-title">Welcome to AI Tech Origin</h2>
+            <p>Continue with Google or get a secure link by email.</p>
+            <SignInOptions />
           </section>
         </div>
       )}
