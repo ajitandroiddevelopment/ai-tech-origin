@@ -1,0 +1,53 @@
+@font-face {
+  font-family: "OriginDisplay";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/fonts/OriginDisplay-0.ttf) format("truetype");
+}
+@font-face {
+  font-family: "OriginDisplay";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/fonts/OriginDisplay-1.ttf) format("truetype");
+}
+@font-face {
+  font-family: "OriginDisplay";
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url(/fonts/OriginDisplay-2.ttf) format("truetype");
+}
+@font-face {
+  font-family: "OriginSans";
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(/fonts/OriginSans-0.ttf) format("truetype");
+}
+@font-face {
+  font-family: "OriginSans";
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(/fonts/OriginSans-1.ttf) format("truetype");
+}
+@font-face {
+  font-family: "OriginSans";
+  font-style: normal;
+  font-weight: 700;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(/fonts/OriginSans-2.ttf) format("truetype");
+}
+@font-face {
+  font-family: "OriginSans";
+  font-style: normal;
+  font-weight: 800;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(/fonts/OriginSans-3.ttf) format("truetype");
+}

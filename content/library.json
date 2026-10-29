@@ -1,0 +1,300 @@
+[
+  {
+    "slug": "cinematic-worlds",
+    "title": "Build a world beyond the frame.",
+    "summary": "Turn a simple idea into a cinematic scene. Start with the subject. Make the atmosphere your own.",
+    "category": "create",
+    "kind": "prompt",
+    "collection": "Cinematic imagery",
+    "model": "Any image model",
+    "cover": "/brand/space-editorial.png",
+    "variables": [
+      {
+        "key": "subject",
+        "label": "Your subject",
+        "default": "a lone explorer"
+      },
+      {
+        "key": "setting",
+        "label": "Setting",
+        "default": "an unfamiliar planet with distant mountains"
+      },
+      {
+        "key": "lighting",
+        "label": "Lighting",
+        "default": "warm side light against a cool atmosphere"
+      },
+      {
+        "key": "ratio",
+        "label": "Aspect ratio",
+        "default": "4:5"
+      }
+    ],
+    "steps": [
+      {
+        "title": "Start with a reference",
+        "description": "Upload a photograph you own or have permission to use. A reference is optional; your subject and setting can carry the composition."
+      },
+      {
+        "title": "Make it yours",
+        "description": "Change the subject, setting, lighting, and aspect ratio below. Specific choices lead to a clearer brief."
+      },
+      {
+        "title": "Generate and refine",
+        "description": "Copy the finished prompt into your image tool with your reference attached. Review details, then request one focused change at a time."
+      }
+    ],
+    "tags": ["Image prompt", "Composition", "ChatGPT"],
+    "featured": true,
+    "published": true,
+    "publishedAt": "2026-10-29",
+    "readMinutes": 3,
+    "inputImage": "/art/input-landscape.svg",
+    "outputImage": "/brand/space-editorial.png",
+    "imageLabel": "EDITORIAL COMPOSITE \u00b7 YOUR REFERENCE",
+    "prompt": "Create an original cinematic editorial image featuring {{subject}} in {{setting}}. Use {{lighting}} lighting, a wide sense of scale, layered depth, and realistic surface textures. Preserve a clear focal point, leave space for a title, and use a {{ratio}} composition. Use the attached image only as a compositional reference; do not reproduce its characters, logos, or title."
+  },
+  {
+    "slug": "product-still-life",
+    "title": "Make the everyday look extraordinary.",
+    "summary": "A considered product scene, with tactile materials and light that does the talking.",
+    "category": "create",
+    "kind": "prompt",
+    "collection": "Product & brand design",
+    "model": "Any image model",
+    "cover": "/art/still-life.svg",
+    "variables": [
+      {
+        "key": "product",
+        "label": "Product",
+        "default": "an unbranded ceramic bottle"
+      },
+      {
+        "key": "surface",
+        "label": "Surface",
+        "default": "stone"
+      },
+      {
+        "key": "ratio",
+        "label": "Aspect ratio",
+        "default": "4:5"
+      }
+    ],
+    "steps": [],
+    "tags": ["Image prompt", "Product design"],
+    "featured": false,
+    "published": true,
+    "publishedAt": "2026-10-29",
+    "readMinutes": 2,
+    "prompt": "Create a studio product photograph of {{product}} on a matte {{surface}} surface. Use soft natural light from one side, gentle shadows, and a quiet monochromatic backdrop. Emphasize authentic material texture, clear product proportions, and generous negative space. No invented logos or labels. Composition: {{ratio}}.",
+    "inputImage": "/art/product-input.svg",
+    "outputImage": "/art/still-life.svg"
+  },
+  {
+    "slug": "research-brief",
+    "title": "From open tabs to a clear point of view.",
+    "summary": "A repeatable workflow for turning a messy research question into an evidence-led brief.",
+    "category": "work",
+    "kind": "guide",
+    "collection": "Research & writing",
+    "model": "Your research assistant",
+    "cover": "/art/research.svg",
+    "variables": [
+      {
+        "key": "topic",
+        "label": "Research question",
+        "default": "how small teams can evaluate a new tool"
+      },
+      {
+        "key": "audience",
+        "label": "Who is reading?",
+        "default": "a busy founder"
+      }
+    ],
+    "steps": [
+      {
+        "title": "Define the decision",
+        "description": "State what the research should help someone decide. Include context, constraints, and the audience.",
+        "prompt": "Help me scope this research: {{topic}}. Ask up to three questions that would change the recommendation."
+      },
+      {
+        "title": "Build an evidence map",
+        "description": "Collect primary sources. Keep the author, publication date, URL, and a short note on what each source establishes.",
+        "prompt": "Create an evidence table for {{topic}}. Columns: claim, primary source, date, support, uncertainty. Mark anything you could not verify."
+      },
+      {
+        "title": "Write the brief",
+        "description": "Turn the evidence into a useful point of view, with a recommendation and its limits.",
+        "prompt": "Use the evidence map to write a brief for {{audience}}. Lead with the decision, then explain the reasoning, counterargument, and remaining unknowns."
+      }
+    ],
+    "tags": ["Workflow", "Research", "Sources"],
+    "featured": false,
+    "published": true,
+    "publishedAt": "2026-10-29",
+    "readMinutes": 3,
+    "prompt": "Research {{topic}} for {{audience}}. Begin by listing the questions that matter. Find primary sources, preserve source dates and links, and separate direct evidence from interpretation. Compare conflicting findings. Deliver a one-page brief with a recommendation, the strongest counterargument, evidence gaps, and the next useful question. Do not invent citations."
+  },
+  {
+    "slug": "focus-five",
+    "title": "Give your best ideas room to grow.",
+    "summary": "A practical focus exercise: choose what matters, and give it your attention.",
+    "category": "learn",
+    "kind": "guide",
+    "collection": "Learning & thinking",
+    "model": "Any writing assistant",
+    "cover": "/brand/focus-rule.png",
+    "variables": [
+      {
+        "key": "goals",
+        "label": "What are you working toward?",
+        "default": "my current learning and work goals"
+      }
+    ],
+    "steps": [
+      {
+        "title": "Get it out of your head",
+        "description": "Write down the goals competing for your attention. Include professional and personal commitments."
+      },
+      {
+        "title": "Choose your five",
+        "description": "Review which priorities matter most now. Consider time, value, and whether the goal is yours or simply expected of you."
+      },
+      {
+        "title": "Create a not-now list",
+        "description": "Keep other ideas somewhere safe. Revisit them at a planned review instead of switching priorities every day."
+      }
+    ],
+    "tags": ["Guide", "Focus", "Personal growth"],
+    "featured": false,
+    "published": true,
+    "publishedAt": "2026-10-29",
+    "readMinutes": 3,
+    "prompt": "Help me prioritize {{goals}}. Ask about my values, deadlines, and current commitments. Group related goals, identify the five most valuable priorities, and suggest a realistic next action for each. Put everything else on a clearly labeled not-now list. Explain the tradeoffs without claiming certainty.",
+    "body": [
+      "The 5/25 exercise is a prioritization framework often attributed to Warren Buffett. Its origin is not established here; the useful part is the act of choosing a small set of priorities.",
+      "The goal is not to turn every hour into work. It is to spend attention deliberately, and leave room for rest, curiosity, and changing circumstances."
+    ]
+  },
+  {
+    "slug": "editorial-layout",
+    "title": "Design with a little more intention.",
+    "summary": "Build a clear editorial layout with a strong headline, breathing room, and a simple hierarchy.",
+    "category": "create",
+    "kind": "prompt",
+    "collection": "Layouts & typography",
+    "model": "Any image model",
+    "cover": "/art/editorial.svg",
+    "variables": [
+      {
+        "key": "format",
+        "label": "Format",
+        "default": "five-slide educational carousel"
+      },
+      {
+        "key": "topic",
+        "label": "Topic",
+        "default": "a useful idea explained simply"
+      }
+    ],
+    "steps": [],
+    "tags": ["Design prompt", "Typography"],
+    "featured": false,
+    "published": true,
+    "publishedAt": "2026-10-29",
+    "readMinutes": 3,
+    "prompt": "Design a {{format}} about {{topic}}. Use a charcoal background, white typography, a bold condensed headline, and a rounded readable body font. Establish one focal image and a consistent grid. Keep generous margins, avoid decorative gradients and glows, and preserve clear contrast. Supply a layout plan and exact copy before generating imagery."
+  },
+  {
+    "slug": "better-learning",
+    "title": "Learn it. Use it. Make it stick.",
+    "summary": "A learning plan built around practice and feedback, rather than another pile of saved tabs.",
+    "category": "learn",
+    "kind": "prompt",
+    "collection": "Learning & thinking",
+    "model": "Any writing assistant",
+    "cover": "/art/learning.svg",
+    "variables": [
+      {
+        "key": "skill",
+        "label": "Skill",
+        "default": "writing clearer prompts"
+      },
+      {
+        "key": "time",
+        "label": "Time available",
+        "default": "20 minutes a day for two weeks"
+      }
+    ],
+    "steps": [],
+    "tags": ["Learning prompt", "Practice"],
+    "featured": false,
+    "published": true,
+    "publishedAt": "2026-10-29",
+    "readMinutes": 3,
+    "prompt": "Help me learn {{skill}} in {{time}}. Start with a short diagnostic of my current level. Build a plan around practical exercises, worked examples, feedback, and spaced recall. Each session should end with something I can do, not just read. Adjust the plan when I show you my work."
+  },
+  {
+    "slug": "website-workflow",
+    "title": "A better website starts with a better brief.",
+    "summary": "Move from idea to a testable page with a small, clear set of prompts.",
+    "category": "work",
+    "kind": "guide",
+    "collection": "Build & code",
+    "model": "Codex or your coding assistant",
+    "cover": "/art/workflow.svg",
+    "variables": [
+      {
+        "key": "project",
+        "label": "Your project",
+        "default": "a personal resource library"
+      }
+    ],
+    "steps": [
+      {
+        "title": "Write the brief",
+        "description": "Describe the audience, their main task, your content, and what successful use looks like.",
+        "prompt": "Help me define {{project}}. Identify its primary audience, three core user journeys, a content model, and what can wait until later. Ask only for details that affect the implementation."
+      },
+      {
+        "title": "Build the first working flow",
+        "description": "Start with one complete journey. Make the actual interactions work before adding more pages.",
+        "prompt": "Implement the main journey for {{project}} with responsive navigation, accessible controls, useful empty states, and clear feedback. Use sample data labeled as sample data. Explain any missing service connections."
+      },
+      {
+        "title": "Test on a phone",
+        "description": "Check the actual page at a narrow width. Try copying, saving, uploading, and navigating with the keyboard.",
+        "prompt": "Test {{project}} at 390px and 1440px. Verify navigation, text readability, focus order, forms, and loading or error states. Fix failures and report what was actually checked."
+      }
+    ],
+    "tags": ["Workflow", "Codex", "Web design"],
+    "featured": false,
+    "published": true,
+    "publishedAt": "2026-10-29",
+    "readMinutes": 3
+  },
+  {
+    "slug": "origin-edit-001",
+    "title": "The Origin Edit: make room for better ideas.",
+    "summary": "One practical prompt, one useful workflow, and one idea to carry into your week.",
+    "category": "learn",
+    "kind": "newsletter",
+    "collection": "The Origin Edit",
+    "model": "",
+    "cover": "/art/newsletter.svg",
+    "variables": [],
+    "steps": [],
+    "tags": ["Newsletter", "Issue 001"],
+    "featured": false,
+    "published": true,
+    "publishedAt": "2026-10-29",
+    "readMinutes": 4,
+    "body": [
+      "Welcome to The Origin Edit. This is a quieter corner of the internet for people who want to make useful things, think a little more clearly, and stay curious.",
+      "TRY THIS \u2014 Before asking a tool to produce something, describe the audience, the purpose, and what a good result looks like. A useful brief is often a better starting point than a clever phrase.",
+      "A WORKFLOW WORTH KEEPING \u2014 Start with one question. Gather a small set of reliable sources. Write down what each source actually establishes. Only then ask for a summary or a recommendation.",
+      "ONE IDEA TO TAKE WITH YOU \u2014 A saved resource is a possibility, not progress. Pick one thing from your library this week and put it to work.",
+      "Until next time, keep exploring. \u2014 AI Tech Origin"
+    ]
+  }
+]
