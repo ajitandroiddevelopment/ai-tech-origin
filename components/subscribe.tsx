@@ -1,6 +1,6 @@
 "use client";
 import { useState, useId } from "react";
-import { ArrowUpRight, Check, LoaderCircle } from "lucide-react";
+import { Check, LoaderCircle } from "lucide-react";
 export function Subscribe({ compact = false }: { compact?: boolean }) {
   const id = useId();
   const [status, setStatus] = useState("");
@@ -65,7 +65,7 @@ export function Subscribe({ compact = false }: { compact?: boolean }) {
           ) : done ? (
             <Check size={20} />
           ) : (
-            <ArrowUpRight size={22} />
+            <span>Join</span>
           )}
         </button>
       </div>

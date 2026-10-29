@@ -67,8 +67,8 @@ Creator Studio displays actual 30-day visitor, page-view, copy, save, and top-re
 
 ## Deployment
 
-The intended Vercel team is Ajit (`team_B6Usx0nkTdjUvcbzVe6rrszB`), project `ai-tech-origin`, with the GitHub repository `ajitandroiddevelopment/ai-tech-origin`. Connect Vercel's GitHub integration to this repository to deploy future `main` commits automatically.
+The intended Vercel team is Ajit (`team_B6Usx0nkTdjUvcbzVe6rrszB`), project `ai-tech-origin`, with the GitHub repository `ajitandroiddevelopment/ai-tech-origin`. Vercel's GitHub integration is connected to this repository; future `main` commits deploy automatically.
 
 ## Design and research
 
-Functional reference research used REA browser evidence from the public reference websites. The application uses an original layout and original starter prompts, your supplied wordmark and content references, and self-hosted open-source Barlow Condensed and Nunito Sans fonts. The reference site's prompt catalog and visual design were not copied. Detailed research evidence is kept locally in the ignored `work/` directory.
+Functional reference research used REA browser evidence from the public reference websites. The application uses an original layout and original starter prompts, your supplied wordmark, rounded Nunito Sans typography, a neutral glass Library/Newsletter switch, desktop sidebar and mobile bottom navigation. Reference posters are not permanent site artwork. The reference site's prompt catalog and visual design were not copied. Detailed research evidence is kept locally in the ignored `work/` directory.

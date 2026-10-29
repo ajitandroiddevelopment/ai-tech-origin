@@ -16,5 +16,20 @@ export const getContent = cache(async (): Promise<Content[]> => {
   }
   return (data ?? [])
     .map((row) => ({ ...row.payload, published: row.published }) as Content)
-    .filter((x) => x.published);
+    .filter((x) => x.published)
+    .map((item) => ({
+      ...item,
+      cover: cleanArtwork(item.cover),
+      inputImage: item.inputImage ? cleanArtwork(item.inputImage) : undefined,
+      outputImage: item.outputImage
+        ? cleanArtwork(item.outputImage)
+        : undefined,
+    }));
 });
+function cleanArtwork(src: string) {
+  return src === "/brand/space-editorial.png"
+    ? "/art/editorial.svg"
+    : src === "/brand/focus-rule.png"
+      ? "/art/learning.svg"
+      : src;
+}

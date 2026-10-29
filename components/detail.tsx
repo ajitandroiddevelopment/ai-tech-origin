@@ -4,7 +4,6 @@ import Link from "next/link";
 import {
   ArrowLeft,
   ArrowRight,
-  ArrowUpRight,
   Bookmark,
   Check,
   Copy,
@@ -12,7 +11,7 @@ import {
   RotateCcw,
   Share2,
   Upload,
-  GripVertical,
+  MoveHorizontal,
   X,
 } from "lucide-react";
 import type { Content } from "@/lib/types";
@@ -39,7 +38,7 @@ export function Detail({
   );
   const [values, setValues] = useState(initial);
   const [ratio, setRatio] = useState("4:5");
-  const [compare, setCompare] = useState(100);
+  const [compare, setCompare] = useState(50);
   const [input, setInput] = useState(item.inputImage || "");
   const [preview, setPreview] = useState(false);
   const [justCopied, setJustCopied] = useState(false);
@@ -208,8 +207,12 @@ export function Detail({
                       style={{ clipPath: `inset(0 ${100 - compare}% 0 0)` }}
                     />
                     <div className="comparison-labels">
+                      <span>
+                        {(item.outputImage || item.cover).endsWith(".svg")
+                          ? "OUTPUT LAYOUT"
+                          : "OUTPUT EXAMPLE"}
+                      </span>
                       <span>INPUT</span>
-                      <span>OUTPUT EXAMPLE</span>
                     </div>
                     {compare > 0 && compare < 100 && (
                       <div
@@ -217,7 +220,7 @@ export function Detail({
                         style={{ left: `${compare}%` }}
                       >
                         <span>
-                          <GripVertical size={22} />
+                          <MoveHorizontal size={25} />
                         </span>
                       </div>
                     )}
@@ -231,7 +234,7 @@ export function Detail({
                     />
                   </div>
                   <div className="comparison-caption">
-                    <span>SLIDE LEFT FOR INPUT · RIGHT FOR OUTPUT</span>
+                    <span>Drag to compare input and output</span>
                     <select
                       aria-label="Image preview aspect ratio"
                       value={ratio}
@@ -266,6 +269,11 @@ export function Detail({
                     images; it does not generate a new output.
                   </p>
                 </>
+              ) : item.slug === "focus-five" ? (
+                <div className="guide-summary">
+                  <h2>The 5/25 Rule</h2>
+                  <p>Choose five priorities. Give them your full attention.</p>
+                </div>
               ) : (
                 <img
                   className="guide-cover"
@@ -274,7 +282,7 @@ export function Detail({
                 />
               )}
               <section className="process-section">
-                <p className="eyebrow">A LITTLE DIRECTION GOES A LONG WAY</p>
+                <p className="eyebrow">THE PROCESS</p>
                 <h2>
                   {item.kind === "guide"
                     ? "The process. Step by step."
@@ -324,12 +332,12 @@ export function Detail({
                 ))}
               </section>
             </div>
-            <aside className="customizer">
+            <aside className="customizer" id="customize">
               <div className="customizer-top">
-                <span className="eyebrow">YOUR IDEA, YOUR VERSION</span>
-                <span className="draft-indicator">DRAFT SAVED LOCALLY</span>
+                <span className="eyebrow">CUSTOMIZE</span>
+                <span className="draft-indicator">Auto-saved</span>
               </div>
-              <h2>Make it your own.</h2>
+              <h2>Customize prompt</h2>
               <p className="customizer-description">
                 A useful starting point. A few personal touches.
               </p>
@@ -351,7 +359,7 @@ export function Detail({
               {item.prompt && (
                 <>
                   <div className="prompt-preview-label">
-                    <span>YOUR FINISHED PROMPT</span>
+                    <span>Your prompt</span>
                     <span>{prompt.length} CHARACTERS</span>
                   </div>
                   <div className="prompt-preview" tabIndex={0}>
@@ -363,7 +371,6 @@ export function Detail({
                   >
                     {justCopied ? <Check size={18} /> : <Copy size={18} />}{" "}
                     {justCopied ? "Copied to clipboard" : "Copy prompt"}
-                    <ArrowUpRight size={17} />
                   </button>
                 </>
               )}
@@ -372,7 +379,7 @@ export function Detail({
                 onClick={() => toggleSave(item.slug)}
               >
                 <Bookmark size={17} fill={isSaved ? "currentColor" : "none"} />
-                {isSaved ? "Saved to your library" : "Save for a good moment"}
+                {isSaved ? "Saved to your library" : "Save prompt"}
               </button>
               <div className="customizer-bottom">
                 <button

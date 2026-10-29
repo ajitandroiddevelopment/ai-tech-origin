@@ -7,7 +7,7 @@
     "kind": "prompt",
     "collection": "Cinematic imagery",
     "model": "Any image model",
-    "cover": "/brand/space-editorial.png",
+    "cover": "/art/editorial.svg",
     "variables": [
       {
         "key": "subject",
@@ -50,7 +50,7 @@
     "publishedAt": "2026-10-29",
     "readMinutes": 3,
     "inputImage": "/art/input-landscape.svg",
-    "outputImage": "/brand/space-editorial.png",
+    "outputImage": "/art/editorial.svg",
     "imageLabel": "EDITORIAL COMPOSITE \u00b7 YOUR REFERENCE",
     "prompt": "Create an original cinematic editorial image featuring {{subject}} in {{setting}}. Use {{lighting}} lighting, a wide sense of scale, layered depth, and realistic surface textures. Preserve a clear focal point, leave space for a title, and use a {{ratio}} composition. Use the attached image only as a compositional reference; do not reproduce its characters, logos, or title."
   },
@@ -143,7 +143,7 @@
     "kind": "guide",
     "collection": "Learning & thinking",
     "model": "Any writing assistant",
-    "cover": "/brand/focus-rule.png",
+    "cover": "/art/learning.svg",
     "variables": [
       {
         "key": "goals",

@@ -1,16 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useApp } from "./providers";
-import {
-  ArrowUpRight,
-  Bookmark,
-  Compass,
-  Grid2X2,
-  Mail,
-  Moon,
-  Sun,
-  UserRound,
-} from "lucide-react";
+import { Bookmark, Grid2X2, Mail, Moon, Sun, UserRound } from "lucide-react";
 export function Header({
   view = "hub",
   onView,
@@ -19,52 +10,42 @@ export function Header({
   onView?: (v: string) => void;
 }) {
   const { theme, toggleTheme, saved, session, signIn } = useApp();
+  const tabs = [
+    { id: "hub", label: "Prompt library", href: "/", Icon: Grid2X2 },
+    { id: "newsletter", label: "Newsletter", href: "/newsletter", Icon: Mail },
+  ];
   return (
     <>
       <header className="site-header">
         <Link href="/" className="brand" aria-label="AI Tech Origin home">
           <span className="brand-image" />
         </Link>
-        <nav className="desktop-nav" aria-label="Main navigation">
-          <Link
-            className={view === "hub" ? "active" : ""}
-            href="/"
-            onClick={(e) => {
-              if (onView) {
-                e.preventDefault();
-                onView("hub");
+        <nav className="mode-switch" aria-label="Main navigation">
+          {tabs.map(({ id, label, href, Icon }) => (
+            <Link
+              key={id}
+              href={href}
+              className={
+                (id === "hub" ? view !== "newsletter" : view === "newsletter")
+                  ? "active"
+                  : ""
               }
-            }}
-          >
-            The Hub
-          </Link>
-          <Link
-            className={view === "newsletter" ? "active" : ""}
-            href="/newsletter"
-            onClick={(e) => {
-              if (onView) {
-                e.preventDefault();
-                onView("newsletter");
+              aria-current={
+                (id === "hub" ? view !== "newsletter" : view === "newsletter")
+                  ? "page"
+                  : undefined
               }
-            }}
-          >
-            Newsletter <ArrowUpRight size={12} />
-          </Link>
-          <Link
-            href="/#saved"
-            className={view === "saved" ? "active" : ""}
-            onClick={(e) => {
-              if (onView) {
-                e.preventDefault();
-                onView("saved");
-              }
-            }}
-          >
-            Saved{" "}
-            <span className="nav-count">
-              {saved.length.toString().padStart(2, "0")}
-            </span>
-          </Link>
+              onClick={(e) => {
+                if (onView) {
+                  e.preventDefault();
+                  onView(id);
+                }
+              }}
+            >
+              <Icon size={19} />
+              {label}
+            </Link>
+          ))}
         </nav>
         <div className="header-actions">
           <button
@@ -74,36 +55,36 @@ export function Header({
               theme === "dark" ? "Switch to day mode" : "Switch to night mode"
             }
           >
-            {theme === "dark" ? <Sun size={19} /> : <Moon size={19} />}
+            {theme === "dark" ? <Sun size={21} /> : <Moon size={21} />}
           </button>
           <button
             className="icon-button account-button"
             aria-label={session ? "Account signed in" : "Sign in to sync saves"}
             onClick={signIn}
           >
-            <UserRound size={19} />
+            <UserRound size={21} />
           </button>
-          <Link className="button small header-explore" href="/#library">
-            Explore the library <ArrowUpRight size={15} />
-          </Link>
         </div>
       </header>
       <nav className="bottom-nav" aria-label="Mobile navigation">
         {[
-          { id: "hub", label: "Hub", Icon: Compass, href: "/" },
-          { id: "library", label: "Library", Icon: Grid2X2, href: "/#library" },
+          { id: "hub", label: "Library", href: "/", Icon: Grid2X2 },
           {
             id: "newsletter",
             label: "Newsletter",
-            Icon: Mail,
             href: "/newsletter",
+            Icon: Mail,
           },
-          { id: "saved", label: "Saved", Icon: Bookmark, href: "/#saved" },
-        ].map(({ id, label, Icon, href }) => (
+          { id: "saved", label: "Saved", href: "/#saved", Icon: Bookmark },
+        ].map(({ id, label, href, Icon }) => (
           <Link
             key={id}
             href={href}
-            className={view === id ? "active" : ""}
+            className={
+              view === id || (id === "hub" && view === "library")
+                ? "active"
+                : ""
+            }
             onClick={(e) => {
               if (onView) {
                 e.preventDefault();
@@ -111,7 +92,7 @@ export function Header({
               }
             }}
           >
-            <Icon size={21} />
+            <Icon size={23} />
             <span>{label}</span>
             {id === "saved" && saved.length > 0 && <i>{saved.length}</i>}
           </Link>

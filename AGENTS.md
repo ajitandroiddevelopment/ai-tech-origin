@@ -1,6 +1,6 @@
 # AI Tech Origin project instructions
 
-Keep the original mobile-first editorial design: charcoal backgrounds, white text, neutral surfaces, no colored AI gradients, glowing controls, or green brand accents. Preserve a working day/night theme. Desktop navigation is at the top; phones use the fixed bottom navigation with safe-area spacing.
+Keep the original mobile-first editorial design: charcoal backgrounds, white text, neutral surfaces, no colored AI gradients, glowing controls, or green brand accents. Preserve a working day/night theme. Use a neutral glass Library/Newsletter switch at the top, desktop side navigation, and fixed mobile bottom navigation with safe-area spacing. Use rounded Nunito Sans lettering throughout, readable labels, soft corners, selective dotted outlines and restrained tilt. No permanent poster hero or tiny decorative arrows. Cards expose Copy and Customize directly.
 
 Keep code, assets, dependency caches, and research on New Volume. On the owner's Mac the APFS image mounts at /Volumes/CodexTools and this checkout is /Volumes/CodexTools/projects/ai-tech-origin. Do not reformat the external drive.
 

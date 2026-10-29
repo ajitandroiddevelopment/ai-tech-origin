@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import { Providers } from "@/components/providers";
 import "./globals.css";
+import "./redesign.css";
 export const metadata: Metadata = {
   title: {
     default: "AI Tech Origin — Ideas into action.",
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "AI Tech Origin",
     description: "Less searching. More creating.",
-    images: ["/brand/space-editorial.png"],
+    images: ["/brand/wordmark.png"],
   },
 };
 export default function Layout({ children }: { children: React.ReactNode }) {
