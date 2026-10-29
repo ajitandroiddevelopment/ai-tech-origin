@@ -2685,3 +2685,16 @@ html[data-theme="light"] .brand-image {
     font-size: 10px;
   }
 }
+
+@media (max-width: 760px) {
+  .card-content > p {
+    font-size: 11px;
+    line-height: 1.7;
+  }
+  .card-meta {
+    font-size: 7px;
+  }
+  .card-footer {
+    font-size: 8px;
+  }
+}

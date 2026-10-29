@@ -6,7 +6,7 @@ Keep code, assets, dependency caches, and research on New Volume. On the owner's
 
 Content belongs to three sections: Create & Design, Work & Research, and Learn & Improve. The newsletter is The Origin Edit. Keep copy concise and useful. Do not invent readership counts, testimonials, generated results, news claims, or capabilities.
 
-Use content/library.json for reviewed Git-based baseline content. Validate with npm test. Database records with matching slugs override baseline entries. Drafts must stay private. Never expose a service-role key, auth token, subscriber email list, or analytics records in public code or responses.
+Use content/library.json for reviewed Git-based baseline content. Validate with npm test. When the database is configured it is the source of truth; import catalog updates through the authorized editor API or Supabase connection. Unpublishing must never fall back to a public starter copy. Drafts must stay private. Never expose a service-role key, auth token, subscriber email list, or analytics records in public code or responses.
 
 Reference inputs selected by visitors stay local. Creator Studio uploads are editor-only and become public site assets. The image comparison is a preview; generation takes place in Codex or the visitor's chosen external tool. Do not imply an external generation request happened when it did not.
 

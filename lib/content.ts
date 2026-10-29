@@ -1,22 +1,20 @@
 import seed from "@/content/library.json";
 import type { Content } from "./types";
 import { getServerDatabase } from "./supabase";
-export async function getContent(): Promise<Content[]> {
-  const originals = seed as Content[];
+import { cache } from "react";
+export const getContent = cache(async (): Promise<Content[]> => {
   const db = getServerDatabase();
-  if (!db) return originals.filter((x) => x.published);
+  if (!db) return (seed as Content[]).filter((x) => x.published);
   const { data, error } = await db
     .from("content")
-    .select("slug,payload,published");
+    .select("payload,published")
+    .eq("published", true)
+    .order("updated_at", { ascending: false });
   if (error) {
     console.error("Content database unavailable:", error.code);
-    return originals.filter((x) => x.published);
+    throw new Error("The resource library is temporarily unavailable.");
   }
-  const map = new Map(originals.map((x) => [x.slug, x]));
-  for (const row of data ?? []) {
-    map.set(row.slug, { ...row.payload, published: row.published });
-  }
-  return [...map.values()]
-    .filter((x) => x.published)
-    .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
-}
+  return (data ?? [])
+    .map((row) => ({ ...row.payload, published: row.published }) as Content)
+    .filter((x) => x.published);
+});

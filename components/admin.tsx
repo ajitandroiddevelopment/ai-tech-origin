@@ -80,10 +80,9 @@ export function Admin() {
         db.rpc("editor_metrics"),
       ]);
       if (cancelled) return;
-      const map = new Map((seed as Content[]).map((x) => [x.slug, x]));
-      for (const r of data ?? [])
-        map.set(r.payload.slug, { ...r.payload, published: r.published });
-      setItems([...map.values()]);
+      setItems(
+        (data ?? []).map((r) => ({ ...r.payload, published: r.published })),
+      );
       if (!stats.error) setMetrics(stats.data);
     };
     void load();

@@ -29,7 +29,7 @@ On Ajit's Mac, source `/Volumes/New Volume/Codex/Tools/environment.sh` first. Th
 
 Visit `/admin` (Creator Studio). It offers image uploads, category and format selection, prompt variables, ordered process steps, newsletter paragraphs, drafts, publishing, JSON import/export, and visitor statistics.
 
-The bundled catalog in `content/library.json` contains original starter content. It is the Git-based baseline. Database records override resources with the same slug, including unpublished drafts. Publishing changes a Supabase record immediately. To hide a baseline item, save that slug as an unpublished draft; do not delete its database override.
+The bundled catalog in `content/library.json` contains original starter content for local previews and initial import. When Supabase is configured, the database is the source of truth. Publishing changes a database record immediately; unpublished drafts are never replaced by a public starter copy. A database outage shows a retry page rather than silently republishing old content.
 
 The owner email is configured in the private `app_private.editor_emails` table. The owner allowlist is configured privately in the database, rather than committed to this repository. Owner sign-in requires a verified Supabase email. Other accounts cannot publish, view subscriber emails, read analytics, or upload site media. Change the allowlist only through an authorized database connection.
 
@@ -37,7 +37,7 @@ The owner email is configured in the private `app_private.editor_emails` table. 
 
 Tell Codex the resource title, section, prompt, customizable fields, process steps, and input/output images. It can:
 
-1. Add the images under `public/` and update `content/library.json`, then commit to GitHub for deployment.
+1. Add images under `public/`, update and validate `content/library.json`, and commit to GitHub. Import the updated JSON into the live database through Creator Studio or the authorized Supabase connection.
 2. Import validated JSON in Creator Studio, or use the connected Supabase tools to upsert the content record.
 3. Validate a JSON file with `npm run publish:content -- path/to/file.json`. Optional authenticated API publishing uses `ORIGIN_SITE_URL` and `ORIGIN_EDITOR_ACCESS_TOKEN` in the shell environment; do not commit tokens.
 
