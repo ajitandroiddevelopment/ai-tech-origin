@@ -72,3 +72,7 @@ The intended Vercel team is Ajit (`team_B6Usx0nkTdjUvcbzVe6rrszB`), project `ai-
 ## Design and research
 
 Functional reference research used REA browser evidence from the public reference websites. The application uses an original layout and original starter prompts, your supplied wordmark, rounded Nunito Sans typography, a neutral glass Library/Newsletter switch, desktop sidebar and mobile bottom navigation. Reference posters are not permanent site artwork. The reference site's prompt catalog and visual design were not copied. Detailed research evidence is kept locally in the ignored `work/` directory.
+
+## Project and agent guide
+
+Read [PROJECT.md](PROJECT.md) for the architecture, admin workflow, owner/team roles, scoped agent API, deployment requirements, and future commerce plan. The public onboarding window is `/agent-access`; a public copy of the guide is refreshed at build time. Current production resources remain free.

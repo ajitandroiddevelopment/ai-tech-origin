@@ -7,6 +7,9 @@ import { getBrowserDatabase, databaseConfigured } from "@/lib/supabase";
 import { validateContent } from "@/lib/validation.mjs";
 import { useApp } from "./providers";
 import { Header } from "./header";
+import { AdminWorkspace } from "./admin-workspace";
+import { StudioLogin } from "./studio-login";
+import { ImageComparison } from "./image-comparison";
 import {
   ArrowDown,
   ArrowUp,
@@ -55,12 +58,16 @@ export function Admin() {
   const db = useMemo(() => getBrowserDatabase(), []);
   const [allowed, setAllowed] = useState(false);
   const [checking, setChecking] = useState(true);
-  const [items, setItems] = useState<Content[]>(seed as Content[]);
+  const [items, setItems] = useState<Content[]>(
+    databaseConfigured ? [] : (seed as Content[]),
+  );
   const [editing, setEditing] = useState<Content | null>(null);
   const [tab, setTab] = useState("content");
   const [busy, setBusy] = useState(false);
   const [metrics, setMetrics] = useState<Metrics | null>(null);
   const [notice, setNotice] = useState("");
+  const [comparison, setComparison] = useState(50);
+  const [filter, setFilter] = useState("");
   useEffect(() => {
     if (!session || !db) {
       setChecking(false);
@@ -94,6 +101,7 @@ export function Admin() {
     setEditing(structuredClone(item));
     setTab("editor");
     setNotice("");
+    setComparison(50);
   }
   function update<K extends keyof Content>(key: K, value: Content[K]) {
     setEditing((x) => (x ? { ...x, [key]: value } : x));
@@ -248,15 +256,47 @@ export function Admin() {
     [next[i], next[target]] = [next[target], next[i]];
     update("steps", next);
   }
+  if (databaseConfigured && !allowed)
+    return (
+      <>
+        <Header />
+        <main className="admin-main">
+          <div className="studio-heading">
+            <div>
+              <h1>Admin workspace</h1>
+              <p>Manage AI Tech Origin.</p>
+            </div>
+          </div>
+          {checking ? (
+            <p role="status">Checking your access…</p>
+          ) : session ? (
+            <section className="workspace-panel">
+              <h2>This account does not have admin access</h2>
+              <p>
+                Ask the owner to add your email. If you just verified it, sign
+                out and sign in again.
+              </p>
+              <button className="button" onClick={signOut}>
+                Sign out
+              </button>
+            </section>
+          ) : (
+            <StudioLogin />
+          )}
+          <a className="studio-agent-link" href="/agent-access">
+            Connecting an AI agent? Open the connection guide.
+          </a>
+        </main>
+      </>
+    );
   return (
     <>
       <Header />
       <main className="admin-main">
         <div className="studio-heading">
           <div>
-            <p className="eyebrow">THE SPACE BEHIND THE SCENES</p>
-            <h1>Creator studio.</h1>
-            <p>Add a good idea. Give it a home.</p>
+            <h1>Admin workspace</h1>
+            <p>Manage your prompts, process guides, images, and newsletter.</p>
           </div>
           <div className="studio-actions">
             <button
@@ -305,6 +345,7 @@ export function Admin() {
             </>
           )}
         </div>
+        {!session && databaseConfigured && <StudioLogin />}
         <nav className="studio-tabs" aria-label="Creator studio">
           <button
             className={tab === "content" ? "active" : ""}
@@ -318,6 +359,21 @@ export function Admin() {
           >
             Visitor overview
           </button>
+          {session &&
+            allowed &&
+            [
+              ["team", "Admins & access"],
+              ["agents", "AI agents"],
+              ["account", "My account"],
+            ].map(([id, label]) => (
+              <button
+                key={id}
+                className={tab === id ? "active" : ""}
+                onClick={() => setTab(id)}
+              >
+                {label}
+              </button>
+            ))}
           {editing && (
             <button
               className={tab === "editor" ? "active" : ""}
@@ -329,26 +385,43 @@ export function Admin() {
         </nav>
         {tab === "content" && (
           <div className="content-table">
-            {items.map((item) => (
-              <button
-                key={item.slug}
-                className="content-row"
-                onClick={() => edit(item)}
-              >
-                <img src={item.cover} alt="" />
-                <div>
-                  <strong>{item.title}</strong>
-                  <span>
-                    {item.collection} / {item.kind}
+            <label className="studio-search">
+              Search content
+              <input
+                value={filter}
+                onChange={(e) => setFilter(e.target.value)}
+                placeholder="Find a prompt, guide, or newsletter"
+              />
+            </label>
+            {items
+              .filter((item) =>
+                (item.title + " " + item.collection + " " + item.slug)
+                  .toLowerCase()
+                  .includes(filter.toLowerCase()),
+              )
+              .map((item) => (
+                <button
+                  key={item.slug}
+                  className="content-row"
+                  onClick={() => edit(item)}
+                >
+                  <img src={item.cover} alt="" />
+                  <div>
+                    <strong>{item.title}</strong>
+                    <span>
+                      {item.collection} / {item.kind}
+                    </span>
+                  </div>
+                  <span className="publish-status">
+                    {item.published ? "Published" : "Draft"}
                   </span>
-                </div>
-                <span className="publish-status">
-                  {item.published ? "Published" : "Draft"}
-                </span>
-                <ArrowUpRight size={19} />
-              </button>
-            ))}
+                  <ArrowUpRight size={19} />
+                </button>
+              ))}
           </div>
+        )}
+        {session && allowed && ["team", "agents", "account"].includes(tab) && (
+          <AdminWorkspace mode={tab} session={session} />
         )}
         {tab === "analytics" && (
           <section className="studio-analytics">
@@ -603,7 +676,7 @@ export function Admin() {
               {editing.steps.map((s, i) => (
                 <div className="step-editor" key={i}>
                   <div className="step-editor-top">
-                    <span>STEP {String(i + 1).padStart(2, "0")}</span>
+                    <span>Step {String(i + 1).padStart(2, "0")}</span>
                     <div>
                       <button
                         className="icon-button"
@@ -724,8 +797,8 @@ export function Admin() {
                       {field === "cover"
                         ? "Card / article cover"
                         : field === "inputImage"
-                          ? "Input reference (slider left)"
-                          : "Output example (slider right)"}
+                          ? "Input image"
+                          : "Output image"}
                       <input
                         value={editing[field] || ""}
                         onChange={(e) => update(field, e.target.value)}
@@ -745,6 +818,21 @@ export function Admin() {
                     </label>
                   </div>
                 ),
+              )}
+              {editing.inputImage && editing.outputImage && (
+                <section className="editor-comparison">
+                  <h3>Live comparison preview</h3>
+                  <p>
+                    These two images become a swipeable comparison automatically
+                    when you publish.
+                  </p>
+                  <ImageComparison
+                    input={editing.inputImage}
+                    output={editing.outputImage}
+                    value={comparison}
+                    onChange={setComparison}
+                  />
+                </section>
               )}
               <div className="editor-publish">
                 <button
@@ -767,7 +855,11 @@ export function Admin() {
                   onClick={() => save(false)}
                 >
                   <Save size={16} />{" "}
-                  {allowed ? "Save as draft" : "Export draft JSON"}
+                  {allowed
+                    ? editing.published
+                      ? "Unpublish and save as draft"
+                      : "Save as draft"
+                    : "Export draft JSON"}
                 </button>
                 <p>
                   Only authorized editors can publish. Public visitors can read

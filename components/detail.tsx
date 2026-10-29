@@ -11,11 +11,11 @@ import {
   RotateCcw,
   Share2,
   Upload,
-  MoveHorizontal,
   X,
 } from "lucide-react";
 import type { Content } from "@/lib/types";
 import { Header } from "./header";
+import { ImageComparison } from "./image-comparison";
 import { Card } from "./card";
 import { Subscribe } from "./subscribe";
 import { trackEvent, useApp } from "./providers";
@@ -163,7 +163,21 @@ export function Detail({
         </div>
         {item.kind === "newsletter" ? (
           <article className="newsletter-article">
-            <img className="article-cover" src={item.cover} alt={item.title} />
+            {item.inputImage && item.outputImage ? (
+              <ImageComparison
+                input={item.inputImage}
+                output={item.outputImage}
+                value={compare}
+                onChange={setCompare}
+                layout={item.outputImage.endsWith(".svg")}
+              />
+            ) : (
+              <img
+                className="article-cover"
+                src={item.cover}
+                alt={item.title}
+              />
+            )}
             {item.body?.map((p, i) => (
               <p key={i}>{p}</p>
             ))}
@@ -175,64 +189,19 @@ export function Detail({
         ) : (
           <div className="detail-grid">
             <div className="detail-story">
-              {item.category === "create" ? (
+              {item.category === "create" ||
+              Boolean(item.inputImage && item.outputImage) ? (
                 <>
-                  <div
-                    className="comparison"
-                    style={{
-                      aspectRatio:
-                        ratio === "4:5"
-                          ? "4/5"
-                          : ratio === "1:1"
-                            ? "1/1"
-                            : "16/9",
-                    }}
-                  >
-                    {input ? (
-                      <img
-                        className="comparison-image"
-                        src={input}
-                        alt="Input reference"
-                      />
-                    ) : (
-                      <div className="comparison-placeholder">
-                        <Upload size={28} />
-                        <span>Add an input image to compare</span>
-                      </div>
-                    )}
-                    <img
-                      className="comparison-image output-image"
-                      src={item.outputImage || item.cover}
-                      alt="Output example"
-                      style={{ clipPath: `inset(0 ${100 - compare}% 0 0)` }}
-                    />
-                    <div className="comparison-labels">
-                      <span>
-                        {(item.outputImage || item.cover).endsWith(".svg")
-                          ? "OUTPUT LAYOUT"
-                          : "OUTPUT EXAMPLE"}
-                      </span>
-                      <span>INPUT</span>
-                    </div>
-                    {compare > 0 && compare < 100 && (
-                      <div
-                        className="compare-line"
-                        style={{ left: `${compare}%` }}
-                      >
-                        <span>
-                          <MoveHorizontal size={25} />
-                        </span>
-                      </div>
-                    )}
-                    <input
-                      type="range"
-                      min="0"
-                      max="100"
-                      value={compare}
-                      onChange={(e) => setCompare(Number(e.target.value))}
-                      aria-label="Reveal output image: slide right for output, left for input"
-                    />
-                  </div>
+                  <ImageComparison
+                    input={input}
+                    output={item.outputImage || item.cover}
+                    value={compare}
+                    onChange={setCompare}
+                    ratio={
+                      ratio === "4:5" ? "4/5" : ratio === "1:1" ? "1/1" : "16/9"
+                    }
+                    layout={(item.outputImage || item.cover).endsWith(".svg")}
+                  />
                   <div className="comparison-caption">
                     <span>Drag to compare input and output</span>
                     <select

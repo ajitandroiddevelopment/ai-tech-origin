@@ -3,6 +3,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { Providers } from "@/components/providers";
 import "./globals.css";
 import "./redesign.css";
+import "./workspace.css";
 export const metadata: Metadata = {
   title: {
     default: "AI Tech Origin — Ideas into action.",
@@ -21,7 +22,12 @@ export const metadata: Metadata = {
 };
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
+    <html
+      lang="en"
+      data-theme="dark"
+      data-scroll-behavior="smooth"
+      suppressHydrationWarning
+    >
       <body>
         <Providers>{children}</Providers>
         <Analytics />

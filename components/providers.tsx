@@ -228,8 +228,8 @@ export function Providers({ children }: { children: React.ReactNode }) {
             <Mail size={28} />
             <h2 id="login-title">Keep your good finds.</h2>
             <p>
-              Sign in to sync your saved resources across devices. No password
-              to remember.
+              Get a secure email link to sign in. Admins can set a password in
+              My account after signing in.
             </p>
             <form onSubmit={sendLink}>
               <label htmlFor="login-email">Email address</label>

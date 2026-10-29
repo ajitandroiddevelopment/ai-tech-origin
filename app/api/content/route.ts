@@ -17,9 +17,12 @@ export async function GET(request: Request) {
         { error: "Unable to load content" },
         { status: 503 },
       );
-    return Response.json({
-      items: data.map((x) => ({ ...x.payload, published: x.published })),
-    });
+    return Response.json(
+      {
+        items: data.map((x) => ({ ...x.payload, published: x.published })),
+      },
+      { headers: { "Cache-Control": "no-store" } },
+    );
   }
   return Response.json({ items: await getContent() });
 }

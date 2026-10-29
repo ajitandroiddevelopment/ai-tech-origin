@@ -1,6 +1,6 @@
 # AI Tech Origin project instructions
 
-Keep the original mobile-first editorial design: charcoal backgrounds, white text, neutral surfaces, no colored AI gradients, glowing controls, or green brand accents. Preserve a working day/night theme. Use a neutral glass Library/Newsletter switch at the top, desktop side navigation, and fixed mobile bottom navigation with safe-area spacing. Use rounded Nunito Sans lettering throughout, readable labels, soft corners, selective dotted outlines and restrained tilt. No permanent poster hero or tiny decorative arrows. Cards expose Copy and Customize directly.
+Use a near-black default theme and clean white day mode with restrained borders, rounded Nunito Sans typography, and plain soft-cornered Library/Newsletter buttons. No glass effects, prism effects, glows, gradients, or gray-filled page backgrounds. Keep desktop side navigation, mobile bottom navigation, and direct card Copy/Customize actions. Do not use reference posters as permanent artwork.
 
 Keep code, assets, dependency caches, and research on New Volume. On the owner's Mac the APFS image mounts at /Volumes/CodexTools and this checkout is /Volumes/CodexTools/projects/ai-tech-origin. Do not reformat the external drive.
 
@@ -21,3 +21,5 @@ This version has breaking changes — APIs, conventions, and file structure may 
 This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
 
 <!-- END:nextjs-agent-rules -->
+
+Read PROJECT.md before changing admin roles, agent APIs, content formats, or future commerce. Keep owner/team secrets out of public documentation.

@@ -8,23 +8,27 @@ if (!file) {
 const raw = JSON.parse(await fs.readFile(file, "utf8"));
 const items = (Array.isArray(raw) ? raw : [raw]).map(validateContent);
 const base = process.env.ORIGIN_SITE_URL;
-const token = process.env.ORIGIN_EDITOR_ACCESS_TOKEN;
+const agentKey = process.env.ORIGIN_AGENT_KEY;
+const token = agentKey || process.env.ORIGIN_EDITOR_ACCESS_TOKEN;
 if (!base || !token) {
   console.log(
-    `Validated ${items.length} resource(s). Set ORIGIN_SITE_URL and ORIGIN_EDITOR_ACCESS_TOKEN to publish, or import this JSON in Creator Studio.`,
+    `Validated ${items.length} resource(s). Set ORIGIN_SITE_URL and ORIGIN_AGENT_KEY (or ORIGIN_EDITOR_ACCESS_TOKEN) to publish, or import this JSON in Creator Studio.`,
   );
   process.exit(0);
 }
-const response = await fetch(new URL("/api/content", base), {
-  method: "POST",
-  headers: {
-    Authorization: `Bearer ${token}`,
-    "Content-Type": "application/json",
+const response = await fetch(
+  new URL(agentKey ? "/api/agent/content" : "/api/content", base),
+  {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(items),
   },
-  body: JSON.stringify(items),
-});
+);
 if (!response.ok) {
   console.error("Publishing failed:", response.status);
   process.exit(1);
 }
-console.log(`Published ${items.length} resource(s).`);
+console.log(`Saved ${items.length} resource(s).`);

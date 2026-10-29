@@ -6,3 +6,5 @@ work/
 *.tsbuildinfo
 .vercel/
 .DS_Store
+
+supabase/.temp/
