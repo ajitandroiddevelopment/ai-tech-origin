@@ -27,6 +27,11 @@ type AppContext = {
 const Context = createContext<AppContext | null>(null);
 export const useApp = () => useContext(Context)!;
 export function trackEvent(name: string, slug?: string) {
+  if (
+    ["localhost", "127.0.0.1"].includes(location.hostname) ||
+    location.pathname.startsWith("/admin")
+  )
+    return;
   try {
     let id = localStorage.getItem("origin.visitor");
     if (!id) {

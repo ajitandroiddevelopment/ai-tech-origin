@@ -54,7 +54,7 @@ export function Admin() {
   const { session, signIn, signOut, toast } = useApp();
   const db = useMemo(() => getBrowserDatabase(), []);
   const [allowed, setAllowed] = useState(false);
-  const [checking, setChecking] = useState(Boolean(db));
+  const [checking, setChecking] = useState(true);
   const [items, setItems] = useState<Content[]>(seed as Content[]);
   const [editing, setEditing] = useState<Content | null>(null);
   const [tab, setTab] = useState("content");

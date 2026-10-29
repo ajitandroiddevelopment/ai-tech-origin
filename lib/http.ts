@@ -1,7 +1,17 @@
 import { getServerDatabase } from "./supabase";
 export function sameOrigin(request: Request) {
   const origin = request.headers.get("origin");
-  return !origin || origin === new URL(request.url).origin;
+  if (!origin) return true;
+  try {
+    const url = new URL(request.url);
+    const originUrl = new URL(origin);
+    const host = request.headers.get("host") || url.host;
+    const protocol =
+      request.headers.get("x-forwarded-proto") || url.protocol.slice(0, -1);
+    return originUrl.host === host && originUrl.protocol === `${protocol}:`;
+  } catch {
+    return false;
+  }
 }
 export async function editorDatabase(request: Request) {
   const token = request.headers.get("authorization")?.replace(/^Bearer /i, "");
