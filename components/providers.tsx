@@ -170,7 +170,11 @@ export function Providers({ children }: { children: React.ReactNode }) {
     setLoginMessage("Sending your sign-in link…");
     const { error } = await db.auth.signInWithOtp({
       email,
-      options: { emailRedirectTo: window.location.origin + "/admin" },
+      options: {
+        emailRedirectTo:
+          window.location.origin +
+          (window.location.pathname.startsWith("/admin") ? "/admin" : "/"),
+      },
     });
     setLoginMessage(
       error ? error.message : "Check your email for a secure sign-in link.",

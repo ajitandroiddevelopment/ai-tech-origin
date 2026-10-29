@@ -45,7 +45,7 @@ Upload site media through Creator Studio to the `origin-media` bucket. Reference
 
 ## Database setup
 
-Apply `supabase/migrations/202610290001_origin.sql` once to a new Supabase project. It creates:
+Apply the SQL files in `supabase/migrations/` in order to a new Supabase project. It creates:
 
 - Published content plus editor-only drafts and writes.
 - User-owned saved resources with row-level security.
@@ -59,7 +59,7 @@ Set Supabase Auth's Site URL to the production site and allow `/admin` on produc
 
 ## Newsletter boundaries
 
-The site publishes web editions and stores newsletter signups. It does not send broadcast emails by itself. The authorized owner can export subscribed addresses to an email provider; connect a sending provider and configure unsubscribe handling before sending campaigns. Do not use the authentication email channel for broadcasts.
+The site publishes web editions and stores newsletter signups. It does not send broadcast emails by itself. The authorized owner can export addresses and their unique unsubscribe URLs to an email provider. Include the unsubscribe URL in each campaign and connect a sending provider before sending campaigns. Do not use the authentication email channel for broadcasts.
 
 ## Analytics
 

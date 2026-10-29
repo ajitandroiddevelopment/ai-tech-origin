@@ -226,12 +226,20 @@ export function Admin() {
     if (!db || !allowed) return;
     const { data, error } = await db
       .from("newsletter_subscribers")
-      .select("email,consent_at,status");
+      .select("email,consent_at,status,unsubscribe_token");
     if (error) {
       toast("Unable to export subscribers");
       return;
     }
-    download(data, "origin-newsletter-subscribers.json");
+    download(
+      data?.map((row) => ({
+        email: row.email,
+        consent_at: row.consent_at,
+        status: row.status,
+        unsubscribe_url: `${window.location.origin}/unsubscribe?token=${row.unsubscribe_token}`,
+      })),
+      "origin-newsletter-subscribers.json",
+    );
   }
   function moveStep(i: number, d: number) {
     if (!editing) return;

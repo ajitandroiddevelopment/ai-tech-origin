@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { SiteImage } from "./site-image";
 import { ArrowUpRight, Bookmark, BookOpen, ArrowRight } from "lucide-react";
 import type { Content } from "@/lib/types";
 import { useApp } from "./providers";
@@ -16,7 +17,7 @@ export function Card({
   return (
     <article className={`resource-card ${compact ? "compact" : ""}`}>
       <Link href={href} className="card-art" aria-label={`Open ${item.title}`}>
-        <img src={item.cover} alt={item.title} loading="lazy" />
+        <SiteImage src={item.cover} alt={item.title} />
         <span className="image-stamp">
           {item.kind === "guide"
             ? "FIELD GUIDE"

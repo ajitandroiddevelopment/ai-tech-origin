@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
+import { SiteImage } from "./site-image";
 import {
   ArrowUpRight,
   ArrowRight,
@@ -170,7 +171,7 @@ export function Hub({
                     <span className="status-dot" /> A RESOURCE LIBRARY FOR
                     CURIOUS MINDS{" "}
                     <span className="hero-edition">
-                      EST. 2026 / ALWAYS EXPLORING
+                      A LITTLE CURIOSITY / EVERY DAY
                     </span>
                   </div>
                   <div className="hero-title-row">
@@ -214,13 +215,17 @@ export function Hub({
                       className="feature-image"
                       href={`/prompt/${featured.slug}`}
                     >
-                      <img
+                      <SiteImage
+                        priority
+                        sizes="(max-width: 760px) 100vw, 65vw"
                         src={featured.cover}
                         alt="A cinematic space editorial shared by AI Tech Origin"
                       />
                       <div className="feature-topline">
                         <span>THE CREATIVE FILES</span>
-                        <span>01 — 07</span>
+                        <span>
+                          01 — {String(resources.length).padStart(2, "0")}
+                        </span>
                       </div>
                       <div className="feature-caption">
                         <div>
